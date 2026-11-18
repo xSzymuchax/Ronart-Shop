@@ -1,0 +1,288 @@
+# Ronart-Shop — model danych
+#
+# Ustalone:
+#   Product.id          uuid v6
+#   Product.price       cena (grosze, PLN)
+#   Product.name        nazwa
+#   Product.slug        adres karty produktu
+#   Product.brand       firma
+#   Product.description opis
+#   Category.id         id
+#   Category.name       nazwa
+#   User.id             uuid v6
+#   User.email          email
+#   User.passwordHash   hash hasła
+#   User.firstName      imię
+#   User.lastName       nazwisko
+#   User.role           rola w systemie
+#   User.isPremium      czy konto jest premium
+#
+# Reszta jest propozycją pierwszego wycinka: katalog, koszyk i zamówienie.
+# Kategoria zastępuje rodzaj. Cena i sumy są liczbami całkowitymi w groszach.
+
+entities:
+  Product:
+    fields:
+      id:
+        type: uuid
+        version: 6
+        primaryKey: true
+      name:
+        type: string
+        required: true
+      slug:
+        type: string
+        required: true
+        unique: true
+        note: fragment adresu, np. trek-marlin-7 w /produkt/trek-marlin-7
+      brand:
+        type: string
+        required: true
+        note: firma, np. Atomic, Trek
+      description:
+        type: text
+        required: true
+      price:
+        type: integer
+        required: true
+        unit: grosz
+        currency: PLN
+      stock:
+        type: integer
+        required: true
+        min: 0
+        proposed: true
+        note: liczba sztuk tej oferty
+      status:
+        type: enum
+        values: [draft, active]
+        required: true
+        default: draft
+        proposed: true
+      imageUrls:
+        type: string[]
+        required: false
+        proposed: true
+
+  Category:
+    fields:
+      id:
+        type: integer
+        primaryKey: true
+      name:
+        type: string
+        required: true
+      slug:
+        type: string
+        required: true
+        unique: true
+        proposed: true
+        note: fragment adresu, np. narciarstwo w /kategoria/narciarstwo
+      parentId:
+        type: ref
+        target: Category
+        required: false
+        proposed: true
+        note: drzewo, np. Narciarstwo > Narty
+
+  User:
+    fields:
+      id:
+        type: uuid
+        version: 6
+        primaryKey: true
+      email:
+        type: string
+        required: true
+        unique: true
+      passwordHash:
+        type: string
+        required: true
+        note: hash hasła, nigdy hasło wprost
+      firstName:
+        type: string
+        required: true
+      lastName:
+        type: string
+        required: true
+      role:
+        type: enum
+        values: [customer, admin]
+        required: true
+        default: customer
+      isPremium:
+        type: boolean
+        required: true
+        default: false
+
+  Cart:
+    proposed: true
+    fields:
+      id:
+        type: uuid
+        version: 6
+        primaryKey: true
+      userId:
+        type: ref
+        target: User
+        required: true
+      items:
+        type: CartItem[]
+        required: true
+        note: zawartość koszyka
+
+  CartItem:
+    proposed: true
+    fields:
+      productId:
+        type: ref
+        target: Product
+        required: true
+      quantity:
+        type: integer
+        required: true
+        min: 1
+
+  Order:
+    proposed: true
+    fields:
+      id:
+        type: uuid
+        version: 6
+        primaryKey: true
+      userId:
+        type: ref
+        target: User
+        required: true
+      status:
+        type: enum
+        values: [placed, paid, shipped, cancelled]
+        required: true
+      placedAt:
+        type: datetime
+        required: true
+      shippingPrice:
+        type: integer
+        required: true
+        unit: grosz
+        currency: PLN
+        min: 0
+        note: koszt dostawy
+      total:
+        type: integer
+        required: true
+        unit: grosz
+        currency: PLN
+        note: suma pozycji plus shippingPrice
+      shippingAddress:
+        type: Address
+        required: true
+      items:
+        type: OrderLine[]
+        required: true
+        note: pozycje zamówienia, kopia koszyka z chwili zakupu
+      payments:
+        type: Payment[]
+        required: true
+        note: próby pobrania; udana jest ta ze statusem paid
+
+  OrderLine:
+    proposed: true
+    fields:
+      productId:
+        type: ref
+        target: Product
+        required: true
+      productName:
+        type: string
+        required: true
+        note: nazwa z chwili zakupu
+      unitPrice:
+        type: integer
+        required: true
+        unit: grosz
+        currency: PLN
+        note: cena z chwili zakupu
+      quantity:
+        type: integer
+        required: true
+        min: 1
+
+  Payment:
+    proposed: true
+    fields:
+      id:
+        type: uuid
+        version: 6
+        primaryKey: true
+      amount:
+        type: integer
+        required: true
+        unit: grosz
+        currency: PLN
+        note: kwota pobrana od klienta
+      fee:
+        type: integer
+        required: false
+        unit: grosz
+        currency: PLN
+        note: prowizja operatora
+      status:
+        type: enum
+        values: [pending, paid, failed, refunded]
+        required: true
+      createdAt:
+        type: datetime
+        required: true
+        note: start próby płatności
+      paidAt:
+        type: datetime
+        required: false
+        note: moment udanego pobrania
+      method:
+        type: enum
+        values: [card, blik, transfer]
+        required: true
+      provider:
+        type: string
+        required: true
+        note: np. payu, przelewy24
+      providerReference:
+        type: string
+        required: false
+        note: identyfikator płatności u operatora
+
+  Address:
+    proposed: true
+    fields:
+      fullName:
+        type: string
+        required: true
+      street:
+        type: string
+        required: true
+      postalCode:
+        type: string
+        required: true
+      city:
+        type: string
+        required: true
+      phone:
+        type: string
+        required: true
+
+relations:
+  ProductCategory:
+    proposed: true
+    from: Product
+    to: Category
+    cardinality: many-to-many
+    note: kurtka może być i w Narciarstwie, i w Rowerze
+
+constraints:
+  - Cart.items unique on productId
+  - Order.items unique on productId
+  - Order.total equals the sum of OrderLine.unitPrice * quantity plus Order.shippingPrice
+  - at most one Payment with status paid per Order
+  - a paid Payment has paidAt set
+  - Product.price, OrderLine.unitPrice, Payment.amount and Payment.fee are integers in grosze
