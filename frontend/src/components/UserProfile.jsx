@@ -30,7 +30,7 @@ function UserProfile({ name }) {
     return (
       <button
         type="button"
-        className="shrink-0 cursor-pointer border-0 bg-transparent px-0.5 py-1 text-lg text-[#2f6b00] hover:text-[#84cc00] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0878a0]"
+        className="shrink-0 cursor-pointer border-0 bg-transparent px-0.5 py-1 text-lg text-[var(--ink)] hover:text-[var(--ink-bright)] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
       >
         Zaloguj
       </button>
@@ -41,7 +41,7 @@ function UserProfile({ name }) {
     <div ref={rootRef} className="relative shrink-0">
       <button
         type="button"
-        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-0 bg-[#2f6b00] text-lg text-[#fff6d8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0878a0]"
+        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-0 bg-[var(--ink)] text-lg text-[var(--banner)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
         aria-label={name.trim()}
         aria-expanded={open}
         aria-haspopup="menu"
@@ -52,14 +52,14 @@ function UserProfile({ name }) {
       {open && (
         <div
           role="menu"
-          className="absolute top-full right-0 z-20 mt-2 min-w-40 rounded-lg bg-[#fff6d8] py-1"
+          className="absolute top-full right-0 z-20 mt-2 min-w-40 rounded-lg bg-[var(--banner)] py-1"
         >
           {menuItems.map((label) => (
             <button
               key={label}
               type="button"
               role="menuitem"
-              className="block w-full cursor-pointer border-0 bg-transparent px-4 py-2 text-left text-lg text-[#2f6b00] hover:text-[#84cc00] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0878a0]"
+              className="block w-full cursor-pointer border-0 bg-transparent px-4 py-2 text-left text-lg text-[var(--ink)] hover:text-[var(--ink-bright)] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
               onClick={() => setOpen(false)}
             >
               {label}

@@ -1,5 +1,5 @@
 function MainPage() {
-  return <main className="flex-1 bg-[#f3e6bc]" />
+  return <main className="flex-1 bg-[var(--page)]" />
 }
 
 export default MainPage

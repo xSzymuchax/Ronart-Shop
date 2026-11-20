@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+[data-theme='summer'] {
+  --banner: #fff6d8;
+  --page: #f3e6bc;
+  --ink: #2f6b00;
+  --ink-bright: #84cc00;
+  --focus: #0878a0;
+}
+
+[data-theme='winter'] {
+  --banner: #f4fbff;
+  --page: #d5ebf6;
+  --ink: #0c4f73;
+  --ink-bright: #3eb6e0;
+  --focus: #0c4f73;
+}
+
+[data-theme='dark-summer'] {
+  --banner: #2c3a1c;
+  --page: #1a220f;
+  --ink: #d7ef86;
+  --ink-bright: #f4ffc2;
+  --focus: #9ad7f2;
+}
+
+[data-theme='dark-winter'] {
+  --banner: #163445;
+  --page: #0c1c28;
+  --ink: #c5ecfb;
+  --ink-bright: #f2fbff;
+  --focus: #c5ecfb;
+}
