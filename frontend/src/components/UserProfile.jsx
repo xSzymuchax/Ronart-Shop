@@ -30,7 +30,7 @@ function UserProfile({ name }) {
     return (
       <button
         type="button"
-        className="shrink-0 cursor-pointer border-0 bg-transparent px-0.5 py-1 text-lg text-[#2f6b00] hover:text-[#84cc00] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0878a0] max-[720px]:ml-auto"
+        className="shrink-0 cursor-pointer border-0 bg-transparent px-0.5 py-1 text-lg text-[#2f6b00] hover:text-[#84cc00] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0878a0]"
       >
         Zaloguj
       </button>
@@ -38,7 +38,7 @@ function UserProfile({ name }) {
   }
 
   return (
-    <div ref={rootRef} className="relative shrink-0 max-[720px]:ml-auto">
+    <div ref={rootRef} className="relative shrink-0">
       <button
         type="button"
         className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-0 bg-[#2f6b00] text-lg text-[#fff6d8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0878a0]"

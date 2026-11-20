@@ -1,3 +1,5 @@
+import UserProfile from './UserProfile.jsx'
+
 const links = ['O nas', 'Oferta', 'Reklamacje', 'Współpraca']
 
 function Banner() {
@@ -18,11 +20,14 @@ function Banner() {
           </button>
         ))}
       </nav>
-      <div
-        className="h-12 w-12 shrink-0 rounded-lg border-2 border-[#0878a0] bg-white max-[720px]:ml-auto"
-        role="img"
-        aria-label="Miejsce na konto użytkownika"
-      />
+      <div className="flex shrink-0 items-center gap-4 max-[720px]:ml-auto">
+        <button
+          type="button"
+          aria-label="Koszyk"
+          className="h-12 w-12 shrink-0 cursor-pointer border-2 border-[#2f6b00] bg-transparent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0878a0]"
+        />
+        <UserProfile name="Sigma" />
+      </div>
     </header>
   )
 }
