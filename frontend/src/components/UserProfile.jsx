@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const menuItems = ['Twój profil', 'Wyloguj']
+const menuItems = ['Twój profil', 'Zamówienia', 'Wyloguj']
 
 function UserProfile({ name }) {
   const letter = name?.trim()?.[0]?.toLocaleUpperCase('pl')
