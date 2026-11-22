@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Banner from './components/Banner.jsx'
+import Footer from './components/Footer.jsx'
 import MainPage from './views/MainPage.jsx'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         onToggleDark={() => setDark((value) => !value)}
       />
       <MainPage />
+      <Footer />
     </div>
   )
 }
