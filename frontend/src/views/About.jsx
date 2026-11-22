@@ -1,8 +1,13 @@
+import ArcTitle from '../components/ArcTitle.jsx'
+
 function About() {
   return (
-    <main className="flex-1 bg-[var(--page)] px-4 py-8 sm:px-6">
-      <div className="mx-auto max-w-5xl rounded-3xl bg-[var(--banner)] px-5 py-10 text-[var(--ink)] shadow-[8px_8px_18px_rgba(0,0,0,0.3)] sm:px-8">
-        <h1 className="text-2xl">Dzień w ruchu</h1>
+    <main className="flex-1 bg-[var(--page)] px-4 pt-20 pb-8 sm:px-6">
+      <div className="relative mx-auto max-w-5xl rounded-3xl bg-[var(--banner)] px-5 py-10 text-[var(--ink)] shadow-[8px_8px_18px_rgba(0,0,0,0.3)] sm:px-8">
+        <h1 className="absolute inset-x-0 bottom-full translate-y-[0.23em] text-center text-5xl font-bold">
+          <ArcTitle>O nas</ArcTitle>
+        </h1>
+        <h2 className="text-2xl">Dzień w ruchu</h2>
 
         <section className="mt-8 flow-root">
           <img

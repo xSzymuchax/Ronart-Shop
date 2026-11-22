@@ -4,7 +4,7 @@ const links = [
   { label: 'O nas', page: 'about' },
   { label: 'Oferta' },
   { label: 'Reklamacje' },
-  { label: 'Współpraca' },
+  { label: 'Współpraca', page: 'cooperation' },
 ]
 
 function Banner({ dark, page, onNavigate, onToggleTheme, onToggleDark }) {

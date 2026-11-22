@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Banner from './components/Banner.jsx'
 import Footer from './components/Footer.jsx'
 import About from './views/About.jsx'
+import Cooperation from './views/Cooperation.jsx'
 import MainPage from './views/MainPage.jsx'
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
         onToggleTheme={() => setWinter((value) => !value)}
         onToggleDark={() => setDark((value) => !value)}
       />
-      {page === 'about' ? <About /> : <MainPage />}
+      {page === 'about' ? <About /> : page === 'cooperation' ? <Cooperation /> : <MainPage />}
       <Footer />
     </div>
   )
