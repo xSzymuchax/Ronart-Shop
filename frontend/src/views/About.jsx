@@ -31,6 +31,8 @@ function About() {
           </p>
         </section>
 
+        <hr className="m-0 mt-14 border-t border-[var(--page)]" />
+
         <section className="mt-14 flow-root">
           <img
             className="mb-6 aspect-[4/3] w-full rounded-2xl border-4 border-[var(--page)] shadow-[8px_8px_18px_rgba(0,0,0,0.3)] object-cover md:float-right md:mb-4 md:ml-8 md:w-[46%]"
@@ -57,6 +59,8 @@ function About() {
             Odpowiadamy po ludzku.
           </p>
         </section>
+
+        <hr className="m-0 mt-14 border-t border-[var(--page)]" />
 
         <section className="mt-14 flow-root">
           <img
