@@ -4,6 +4,7 @@ import Footer from './components/Footer.jsx'
 import About from './views/About.jsx'
 import Cooperation from './views/Cooperation.jsx'
 import MainPage from './views/MainPage.jsx'
+import Terms from './views/Terms.jsx'
 
 function App() {
   const [winter, setWinter] = useState(false)
@@ -23,8 +24,16 @@ function App() {
         onToggleTheme={() => setWinter((value) => !value)}
         onToggleDark={() => setDark((value) => !value)}
       />
-      {page === 'about' ? <About /> : page === 'cooperation' ? <Cooperation /> : <MainPage />}
-      <Footer />
+      {page === 'about' ? (
+        <About />
+      ) : page === 'cooperation' ? (
+        <Cooperation />
+      ) : page === 'terms' ? (
+        <Terms />
+      ) : (
+        <MainPage />
+      )}
+      <Footer page={page} onNavigate={setPage} />
     </div>
   )
 }
