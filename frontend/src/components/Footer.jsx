@@ -1,8 +1,8 @@
 const links = [
   { label: 'Regulamin', page: 'terms' },
-  { label: 'Polityka prywatności' },
+  { label: 'Polityka prywatności', page: 'privacy' },
   { label: 'Reklamacje' },
-  { label: 'Kontakt' },
+  { label: 'Współpraca', page: 'cooperation' },
 ]
 
 function Footer({ page, onNavigate }) {

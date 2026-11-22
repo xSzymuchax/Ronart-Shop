@@ -4,6 +4,7 @@ import Footer from './components/Footer.jsx'
 import About from './views/About.jsx'
 import Cooperation from './views/Cooperation.jsx'
 import MainPage from './views/MainPage.jsx'
+import Privacy from './views/Privacy.jsx'
 import Terms from './views/Terms.jsx'
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
         <Cooperation />
       ) : page === 'terms' ? (
         <Terms />
+      ) : page === 'privacy' ? (
+        <Privacy />
       ) : (
         <MainPage />
       )}
