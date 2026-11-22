@@ -1,24 +1,28 @@
 import { useState } from 'react'
 import Banner from './components/Banner.jsx'
 import Footer from './components/Footer.jsx'
+import About from './views/About.jsx'
 import MainPage from './views/MainPage.jsx'
 
 function App() {
   const [winter, setWinter] = useState(false)
   const [dark, setDark] = useState(false)
+  const [page, setPage] = useState('home')
   const season = winter ? 'winter' : 'summer'
 
   return (
     <div
       data-theme={dark ? `dark-${season}` : season}
-      className="flex min-h-screen flex-col"
+      className="flex min-h-screen flex-col bg-[var(--page)]"
     >
       <Banner
         dark={dark}
+        page={page}
+        onNavigate={setPage}
         onToggleTheme={() => setWinter((value) => !value)}
         onToggleDark={() => setDark((value) => !value)}
       />
-      <MainPage />
+      {page === 'about' ? <About /> : <MainPage />}
       <Footer />
     </div>
   )

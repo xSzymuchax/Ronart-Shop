@@ -1,10 +1,15 @@
 import UserProfile from './UserProfile.jsx'
 
-const links = ['O nas', 'Oferta', 'Reklamacje', 'Współpraca']
+const links = [
+  { label: 'O nas', page: 'about' },
+  { label: 'Oferta' },
+  { label: 'Reklamacje' },
+  { label: 'Współpraca' },
+]
 
-function Banner({ dark, onToggleTheme, onToggleDark }) {
+function Banner({ dark, page, onNavigate, onToggleTheme, onToggleDark }) {
   return (
-    <header className="sticky top-0 z-10 box-border flex w-full flex-wrap items-center gap-4 bg-[var(--banner)] px-5 py-2">
+    <header className="sticky top-0 z-10 box-border flex w-full flex-wrap items-center gap-4 bg-[var(--banner)] px-5 py-2 shadow-[0_8px_18px_rgba(0,0,0,0.3)]">
       <button
         type="button"
         onClick={onToggleTheme}
@@ -17,13 +22,15 @@ function Banner({ dark, onToggleTheme, onToggleDark }) {
         className="flex min-w-0 flex-1 flex-wrap justify-evenly max-[720px]:order-3 max-[720px]:w-full max-[720px]:shrink-0 max-[720px]:basis-full"
         aria-label="Nawigacja"
       >
-        {links.map((label) => (
+        {links.map((link) => (
           <button
-            key={label}
+            key={link.label}
             type="button"
-            className="cursor-pointer border-0 bg-transparent px-0.5 py-1 text-lg text-[var(--ink)] hover:text-[var(--ink-bright)] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
+            aria-current={link.page && page === link.page ? 'page' : undefined}
+            onClick={link.page ? () => onNavigate(link.page) : undefined}
+            className={`cursor-pointer border-0 bg-transparent px-0.5 py-1 text-lg text-[var(--ink)] hover:text-[var(--ink-bright)] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)] ${page === link.page ? 'underline' : ''}`}
           >
-            {label}
+            {link.label}
           </button>
         ))}
       </nav>
